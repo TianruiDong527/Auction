@@ -32,7 +32,8 @@
     "next:serve": "yarn workspace @se-2/nextjs serve",
     "postinstall": "husky install",
     "precommit": "lint-staged",
-    "vercel": "yarn workspace @se-2/nextjs vercel"
+    "vercel": "yarn workspace @se-2/nextjs vercel",
+    "build": "yarn next:build && yarn next:check-types"
   },
   "packageManager": "yarn@1.22.22",
   "devDependencies": {

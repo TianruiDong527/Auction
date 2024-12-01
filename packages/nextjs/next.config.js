@@ -6,7 +6,7 @@ const nextConfig = {
     serverComponentsExternalPackages: ["ipfs-utils"],
   },
   reactStrictMode: true,
-  // Ignoring typescript/eslint errors during build (deploy won't fail even if there are errors)
+  // Ignoring TypeScript/ESLint errors during build (deploy won't fail even if there are errors)
   typescript: {
     ignoreBuildErrors: true,
   },
@@ -14,8 +14,20 @@ const nextConfig = {
     ignoreDuringBuilds: true,
   },
   webpack: config => {
-    config.resolve.fallback = { fs: false, net: false, tls: false };
+    config.module.rules.push({
+      test: /\.d\.ts(\.map)?$/, 
+      use: "null-loader", 
+    });
+
     config.externals.push("pino-pretty", "lokijs", "encoding");
+
+    config.resolve.fallback = { fs: false, net: false, tls: false };
+
+    config.optimization = {
+      ...config.optimization,
+      minimize: true, 
+    };
+
     return config;
   },
 };

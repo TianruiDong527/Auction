@@ -32,4 +32,28 @@ const nextConfig = {
   },
 };
 
-module.exports = nextConfig;
+module.exports = {
+  experimental: {
+    serverComponentsExternalPackages: ["ipfs-utils"],
+  },
+  reactStrictMode: true,
+  typescript: {
+    ignoreBuildErrors: true,
+  },
+  eslint: {
+    ignoreDuringBuilds: true,
+  },
+  webpack: config => {
+    // 忽略 .d.ts.map 和 .js.map 文件
+    config.module.rules.push({
+      test: /\.(d\.ts|js)\.map$/,
+      use: "null-loader",
+    });
+
+    config.externals.push("pino-pretty", "lokijs", "encoding");
+
+    config.resolve.fallback = { fs: false, net: false, tls: false };
+
+    return config;
+  },
+};

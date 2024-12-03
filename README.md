@@ -1,3 +1,9 @@
+# This project is based on Scaffold eth2 challenge #0.
+This project is based on Scaffold ETH2 challenge #0. You can mint the tokens in default styles or create your own with ipfs url.
+You can also start, end or participate in auctions.
+The following content is the original readme file.
+
+
 # 🚩 Challenge #0: 🎟 Simple NFT Example
 
 ![readme-0](https://github.com/scaffold-eth/se-2-challenges/assets/80153681/375b7797-6839-43cd-abe5-fca94d88e300)

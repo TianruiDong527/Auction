@@ -31,6 +31,19 @@ export const NFTCard = ({ nft }: { nft: Collectible }) => {
         <div className="flex flex-col justify-center mt-1">
           <p className="my-0 text-lg">{nft.description}</p>
         </div>
+
+        <div className="flex flex-col mt-1">
+          <span className="text-sm font-medium">Token URI:</span>
+          <a 
+            href={nft.uri} 
+            target="_blank" 
+            rel="noopener noreferrer"
+            className="text-sm text-primary hover:text-primary-focus break-all"
+          >
+            {nft.uri}
+          </a>
+        </div>
+
         <div className="flex space-x-3 mt-1 items-center">
           <span className="text-lg font-semibold">Owner : </span>
           <Address address={nft.owner} />

@@ -35,8 +35,9 @@ const AuctionPage: NextPage = () => {
   });
 
   // 出价
-  const handlePlaceBid = async () => {
-    if (!queryTokenId || !bidAmount) {
+  const handlePlaceBid = async (tokenId?: bigint) => {
+    const targetTokenId = tokenId || BigInt(queryTokenId);
+    if (!targetTokenId || !bidAmount) {
       notification.error("Please enter token ID and bid amount");
       return;
     }
@@ -45,7 +46,7 @@ const AuctionPage: NextPage = () => {
       const notificationId = notification.loading("Placing bid...");
       await writeContractAsync({
         functionName: "placeBid",
-        args: [BigInt(queryTokenId)],
+        args: [targetTokenId],
         value: BigInt(bidAmount),
       });
       notification.remove(notificationId);
@@ -58,8 +59,9 @@ const AuctionPage: NextPage = () => {
   };
 
   // 结束拍卖
-  const handleEndAuction = async () => {
-    if (!queryTokenId) {
+  const handleEndAuction = async (tokenId?: bigint) => {
+    const targetTokenId = tokenId || BigInt(queryTokenId);
+    if (!targetTokenId) {
       notification.error("Please enter token ID");
       return;
     }
@@ -68,7 +70,7 @@ const AuctionPage: NextPage = () => {
       const notificationId = notification.loading("Ending auction...");
       await writeContractAsync({
         functionName: "endAuction",
-        args: [BigInt(queryTokenId)],
+        args: [targetTokenId],
       });
       notification.remove(notificationId);
       notification.success("Auction ended successfully!");
